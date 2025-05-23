@@ -2,16 +2,20 @@ const express = require("express");
 
 const app = express();
 
-app.use("/home", (req, res) => {
-  res.send("go to home and start coding");
+app.get("/user", (req, res) => {
+  res.send("Welcome user! Enjoy if you can 🥰");
+});
+
+app.post("/user", (req, res) => {
+  res.send("You have contacted us and we updated");
+});
+
+app.delete("/user", (req, res) => {
+  res.send("User Deleted 🫡");
 });
 
 app.use("/test", (req, res) => {
-  res.send("Get ready for fuc*ing suprise test");
-});
-
-app.use("/", (req, res) => {
-  res.send("Hello from Dashboard!");
+  res.send("Server running 🏃‍♂️");
 });
 
 app.listen(3000, () => {
