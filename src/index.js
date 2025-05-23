@@ -1,23 +1,28 @@
 const express = require("express");
+const { AdminAuth, UserAuth } = require("./middleware/auth");
 
 const app = express();
 
-app.get("/user", (req, res) => {
-  res.send("Welcome user! Enjoy if you can 🥰");
+// MIDDLEWARES
+// ADMIN
+app.use("/admin", AdminAuth);
+
+// USER
+app.use("/user", UserAuth);
+
+app.get("/admin/allUser", (req, res) => {
+  res.send("All Users Detail Fetched!");
 });
 
-app.post("/user", (req, res) => {
-  res.send("You have contacted us and we updated");
+app.get("/admin/deleteUser", (req, res) => {
+  res.send("User Deleted!");
 });
 
-app.delete("/user", (req, res) => {
-  res.send("User Deleted 🫡");
-});
-
-app.use("/test", (req, res) => {
-  res.send("Server running 🏃‍♂️");
+app.get("/user/getUser", (req, res) => {
+  const { name, password } = req.query;
+  res.send(`Name: ${name}\nPassword: ${password}`);
 });
 
 app.listen(3000, () => {
-  console.log("Server is listening on Port: 3000");
+  console.log("Server is running on port: 3000");
 });
